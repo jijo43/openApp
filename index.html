@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Tic Tac Toe App</title>
+    <script>
+        function openApp() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var sceneName = urlParams.get('sceneName');
+            var playerName = urlParams.get('playerName');
+            var roomId = urlParams.get('roomId');
+            
+            var deepLink = 'gatch://tictactoe?ServerConnection#' + playerName + '&' + roomId + '&scene=' + sceneName;
+            
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            var isAndroid = /android/i.test(userAgent);
+            
+            if (isAndroid) {
+                // Android: Directly open the app
+                window.location.href = deepLink;
+            } else {
+                // Non-Android: Redirect to Play Store or fallback
+                window.location.href = 'https://play.google.com/store/apps/details?id=com.unity3d.player';
+            }
+        }
+    </script>
+</head>
+<body onload="openApp()">
+    <h1>Opening Tic Tac Toe App...</h1>
+</body>
+</html>
